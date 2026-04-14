@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="/styles/media.css" rel="stylesheet"> 
     <title>Clínica Virtual</title>
 </head>
 
@@ -65,6 +65,17 @@
         a:hover{
             color: black;
             transition: 0.3 all;
+        }
+
+        #inscrevaButton{
+            border: 2px solid rgb(23, 23, 138);
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        #inscrevaButton:hover{
+            background-color: rgb(23, 23, 138);
+            color: white;
         }
 
         input {
@@ -145,7 +156,7 @@
             <a href="#"><li>Serviço</li></a>
             <a href="#"><li>Sobre</li></a>
             <a href="#"><li>Contato</li></a>
-            <a href="#"><li>Já tem uma conta?</li></a>
+            <a href="#" id="inscrevaButton"><li>Já tem uma conta?</li></a>
         </ul>
     </header>
 
