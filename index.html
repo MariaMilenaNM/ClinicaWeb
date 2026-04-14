@@ -1,279 +1,273 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/styles/media.css" rel="stylesheet"> 
-    <title>Clínica Virtual</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <title>Clínica Virtual</title>
 </head>
 
-    <style>
-        body{
-            background-color: rgb(251, 251, 251);
-            color: rgb(2, 2, 65);
-            font-family: Verdana;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px; 
-        }
+<style>
+  body{
+    background-color: rgb(251, 251, 251);
+    color: rgb(2, 2, 65);
+    font-family: Verdana;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+  }
 
-        header {
-            font-family: Verdana;
-            display: flex;
-            flex-direction: row;
-            background-color: white;
-            justify-content: space-between;
-            align-items: center;
-        }
+  header {
+    font-family: Verdana;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-        #title{
-            flex-direction: column;
-            line-height:10px;
-        }
+  #title{
+    flex-direction: column;
+    line-height:10px;
+  }
 
-        li{
-            display: inline-block;
-            margin: 20px;
-        }
+  li{
+    display: inline-block;
+    margin: 20px;
+  }
 
-        main{
-           display: flex; 
-           flex-direction: row;
-           margin-top: 50px;
-        }
+  main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+  }
 
-        ul{
-           
-        }
+  ul{
 
-        p{
-            line-height: 20px;
-            max-width: 500px;
-            font-family: Verdana;
-        }
+  }
 
-        img{
-            width: 300px;
-            height: 300px;
-            object-position: center top;
-        }
+  p{
+    line-height: 20px;
+    max-width: 500px;
+    font-family: Verdana;
+  }
 
-        a{
-            color: rgb(23, 23, 138);
-        }
+  img{
+    width: 300px;
+    height: 300px;
+    object-position: center top;
+  }
 
-        a:hover{
-            color: black;
-            transition: 0.3 all;
-        }
+  a{
+    color: rgb(23, 23, 138);
+  }
 
-        #inscrevaButton{
-            border: 2px solid rgb(23, 23, 138);
-            padding: 10px;
-            border-radius: 15px;
-        }
+  a:hover{
+    color: black;
+    transition: 0.3 all;
+  }
 
-        #inscrevaButton:hover{
-            background-color: rgb(23, 23, 138);
-            color: white;
-        }
+  input {
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
 
-        input {
-            padding: 5px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
+  h1{
+    font-size: 200;
+  }
 
-        h1{
-            font-size: 200;
-        }
+  h2{
+    font-size: 60;
+    line-height: 10px;
+    font-family: Verdana;
+  }
 
-        h2{
-            font-size: 60;
-            line-height: 10px;
-            font-family: Verdana;
-        }
+  h3{
+    color: black;
+  }
 
-        h3{
-           color: black;
-        }
+  span{
+    color:rgb(23, 23, 138);
+  }
 
-        span{
-            color:rgb(23, 23, 138);
-        }
+  p{
+    font-size: 20px;
+  }
 
-        p{
-            font-size: 20px;
-        }
+  button{
+    background-color: rgb(2, 2, 65);
+    color:white;
+    border: none;
+    font-family: Verdana;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
 
-        button{
-            background-color: rgb(2, 2, 65);
-            color:white;
-            border: none;
-            font-family: Verdana;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+  }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-        }
+  table, th, td {
+    border: 1px solid #ddd;
+  }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
+  th {
+    background-color: rgb(2, 2, 65);
+    color: white;
+  }
 
-        th {
-            background-color: rgb(2, 2, 65);
-            color: white;
-        }
-
-    </Style>
+</Style>
 
 <body>
-    <header>
-        <div id="title">
-            <h1>Clínica</h1>
-            <h1>Virtual</h1>
-        </div>
-        
-        <ul>
-            <a href="#"><li>Início</li></a>
-            <a href="#"><li>Serviço</li></a>
-            <a href="#"><li>Sobre</li></a>
-            <a href="#"><li>Contato</li></a>
-            <a href="#" id="inscrevaButton"><li>Já tem uma conta?</li></a>
-        </ul>
-    </header>
+<header>
+  <div id="title">
+    <h1>Clínica</h1>
+    <h1>Virtual</h1>
+  </div>
 
-    <main>
-        <aside> 
-            <h2><span>Veja nossos profissionais</span></h2>
-            <h2>na Clínica Virtual</h2>
-            <p>Aqui você pode visualizar os profissionais disponíveis</p>
-        
-            <form> 
-                <input id="nome" type="text" placeholder="Nome"/>
-                <input id="profissao" type="text" placeholder="Profissão"/>
-                <input id="crp" type="CRP" placeholder="CRP"/>
-                <input id="contato" type="email" placeholder="E-mail"/>
-                <button type="button" onclick="Create()">Salvar</button>
-            </form>
+  <ul>
+    <a href="#"><li>Início</li></a>
+    <a href="#"><li>Serviço</li></a>
+    <a href="#"><li>Sobre</li></a>
+    <a href="#"><li>Contato</li></a>
+    <a href="pacientes.html"><li>Já tem uma conta?</li></a>
+  </ul>
+</header>
 
-            <p>Profissionais</p>
-            <div id="tabeladiv">  
-                <table id="tabela">
-                    <thread>
-                    <tr>
-                            <th>Nome</th>
-                            <th>Profissão</th>
-                            <th>CRP</th>
-                            <th>E-mail</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thread>
-                    <tbody id="resultados"></tbody>
-                </table>
-            </div>
-            <div id="editar"></div>
-        </aside>
+<main>
+  <aside>
+    <h2><span>Veja nossos profissionais</span></h2>
+    <h2>na Clínica Virtual</h2>
+    <p>Venha fazer parte dela. Cadastre-se! </p>
 
-        <article>
-            <img src='https://www.psicologosberrini.com.br/wp-content/uploads/servicos-de-psicologia-1017x1024.png'>
-        </article>
-    </main>
+    <form>
+      <input id="nome" type="text" placeholder="Nome"/>
+      <input id="profissao" type="text" placeholder="Profissão"/>
+      <input id="crp" type="CRP" placeholder="CRP"/>
+      <input id="contato" type="email" placeholder="E-mail"/>
+      <button type="button" onclick="Create()">Salvar</button>
+    </form>
 
-    <script>
-        let listaDeProfissionais =[];
-        let index = 0;
+    <details style="margin-top: 20px; width: 100%;">
+      <summary style="cursor: pointer; font-weight: bold; text-align: center; font-size: 18px; color: rgb(2, 2, 65); padding: 10px;">
+        Aqui você pode nossos profissionais disponíveis
+      </summary>
 
-        function Create(){
-            let nome = document.getElementById("nome").value;
-            let profissao = document.getElementById("profissao").value;
-            let crp = document.getElementById("crp").value;
-            let contato = document.getElementById("contato").value;
+      <div id="tabeladiv">
+        <table id="tabela">
+          <thead> <tr>
+            <th>Nome</th>
+            <th>Profissão</th>
+            <th>CRP</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+          </tr>
+          </thead>
+          <tbody id="resultados"></tbody>
+        </table>
+      </div>
+    </details>
 
-            let entradaObj = {
-                id: index,
-                nome: nome,
-                profissao: profissao,
-                crp: crp,
-                contato: contato
-            }
-            index++;
-            listaDeProfissionais.push(entradaObj);
-            Retrieve();
-            document.getElementById("nome").value = "";
-            document.getElementById("profissao").value = "";
-            document.getElementById("crp").value = "";
-            document.getElementById("contato").value = "";
-        };
+  </aside>
 
-        function Retrieve(){
-            let tbody = document.getElementById("resultados");
-            let html = "";
-            listaDeProfissionais.forEach(elemento => {
-                html += `<tr>
+
+  <article>
+    <img src='https://www.psicologosberrini.com.br/wp-content/uploads/servicos-de-psicologia-1017x1024.png'>
+  </article>
+</main>
+
+<script>
+  let listaDeProfissionais =[];
+  let index = 0;
+
+  function Create(){
+    let nome = document.getElementById("nome").value;
+    let profissao = document.getElementById("profissao").value;
+    let crp = document.getElementById("crp").value;
+    let contato = document.getElementById("contato").value;
+
+    let entradaObj = {
+      id: index,
+      nome: nome,
+      profissao: profissao,
+      crp: crp,
+      contato: contato
+    }
+    index++;
+    listaDeProfissionais.push(entradaObj);
+    Retrieve();
+    document.getElementById("nome").value = "";
+    document.getElementById("profissao").value = "";
+    document.getElementById("crp").value = "";
+    document.getElementById("contato").value = "";
+  };
+
+  function Retrieve(){
+    let tbody = document.getElementById("resultados");
+    let html = "";
+    listaDeProfissionais.forEach(elemento => {
+      html += `<tr>
                             <td>${elemento.nome}</td>
                             <td>${elemento.profissao}</td>
                             <td>${elemento.crp}</td>
                             <td>${elemento.contato}</td>
-                        <td> 
+                        <td>
                             <button onclick="Update(${elemento.id})">Editar</button>
                         <button onclick="Delete(${elemento.id})">Excluir</button>
                         </td>
                     </tr>`;
-            });
-            tbody.innerHTML = html;
-        };
+    });
+    tbody.innerHTML = html;
+  };
 
-        function Update(id){
-            let resultado = listaDeProfissionais.find(obj => obj.id === id);
-            let html = `<input type="text" id="nomeParaEditar" placeholder = "Nome">
+  function Update(id){
+    let resultado = listaDeProfissionais.find(obj => obj.id === id);
+    let html = `<input type="text" id="nomeParaEditar" placeholder = "Nome">
                         <input type="text" id="profissaoParaEditar" placeholder = "Profissão">
                         <input type="text" id="crpParaEditar" placeholder = "CRP">
                         <input type="text" id="contatoParaEditar" placeholder = "Contato">
                         <button onclick="editarDados(${id})">Editar</button>`;
-            let divEditar = document.getElementById('editar');
-            divEditar.innerHTML = html;
-        };
+    let divEditar = document.getElementById('editar');
+    divEditar.innerHTML = html;
+  };
 
-        function editarDados(id){
-            let nome = document.getElementById("nomeParaEditar").value;
-            let profissao = document.getElementById("profissaoParaEditar").value;
-            let crp = document.getElementById("crpParaEditar").value;
-            let contato = document.getElementById("contatoParaEditar").value;
-            let resultado = listaDeProfissionais.find(obj => obj.id === id);
-            resultado.nome = nome;
-            resultado.profissao = profissao;
-            resultado.crp = crp;
-            resultado.contato = contato;
-            Retrieve();
-            let divEditar = document.getElementById('editar');
-            divEditar.innerHTML = "";
-        };
+  function editarDados(id){
+    let nome = document.getElementById("nomeParaEditar").value;
+    let profissao = document.getElementById("profissaoParaEditar").value;
+    let crp = document.getElementById("crpParaEditar").value;
+    let contato = document.getElementById("contatoParaEditar").value;
+    let resultado = listaDeProfissionais.find(obj => obj.id === id);
+    resultado.nome = nome;
+    resultado.profissao = profissao;
+    resultado.crp = crp;
+    resultado.contato = contato;
+    Retrieve();
+    let divEditar = document.getElementById('editar');
+    divEditar.innerHTML = "";
+  };
 
-        function Delete(id){
-            let novaLista = listaDeProfissionais.filter(obj => obj.id !== id);
-            listaDeProfissionais = novaLista;
-            Retrieve();
-        };
+  function Delete(id){
+    let novaLista = listaDeProfissionais.filter(obj => obj.id !== id);
+    listaDeProfissionais = novaLista;
+    Retrieve();
+  };
 
 
-    </script>
+</script>
 </body>
 </html>
