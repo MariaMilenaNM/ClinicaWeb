@@ -33,8 +33,10 @@
 
     <form>
       <input id="nome" type="text" placeholder="Nome"/>
-      <input id="profissao" type="text" placeholder="Profissão"/>
-      <input id="crp" type="CRP" placeholder="CRP"/>
+      <input id="crp" type="number" placeholder="CRP"/>
+      <input id="modalidade" type="text" placeholder="Modalidade"/>
+      <input id="link" type="text" placeholder="Link Instagram"/>
+      <input id="numero" type="text" placeholder="Número"/>
       <input id="contato" type="email" placeholder="E-mail"/>
       <button type="button" onclick="Create()">Salvar</button>
     </form>
@@ -48,8 +50,10 @@
         <table id="tabela">
           <thead> <tr>
             <th>Nome</th>
-            <th>Profissão</th>
             <th>CRP</th>
+            <th>Modalidade</th>
+            <th>Link</th>
+            <th>Número</th>
             <th>E-mail</th>
             <th>Ações</th>
           </tr>
@@ -58,6 +62,7 @@
         </table>
       </div>
     </details>
+    <div id="editar"></div>
 
   </aside>
 
@@ -73,23 +78,29 @@
 
   function Create(){
     let nome = document.getElementById("nome").value;
-    let profissao = document.getElementById("profissao").value;
     let crp = document.getElementById("crp").value;
+    let modalidade = document.getElementById("modalidade").value;
+    let link = document.getElementById("link").value;
+    let numero = document.getElementById("numero").value;
     let contato = document.getElementById("contato").value;
 
     let entradaObj = {
       id: index,
       nome: nome,
-      profissao: profissao,
       crp: crp,
+      modalidade: modalidade,
+      link: link,
+      numero: numero,
       contato: contato
     }
     index++;
     listaDeProfissionais.push(entradaObj);
     Retrieve();
     document.getElementById("nome").value = "";
-    document.getElementById("profissao").value = "";
     document.getElementById("crp").value = "";
+    document.getElementById("modalidade").value = "";
+    document.getElementById("link").value = "";
+    document.getElementById("numero").value = "";
     document.getElementById("contato").value = "";
   };
 
@@ -99,8 +110,10 @@
     listaDeProfissionais.forEach(elemento => {
       html += `<tr>
                             <td>${elemento.nome}</td>
-                            <td>${elemento.profissao}</td>
                             <td>${elemento.crp}</td>
+                            <td>${elemento.modalidade}</td>
+                            <td>${elemento.link}</td>
+                            <td>${elemento.numero}</td>
                             <td>${elemento.contato}</td>
                         <td>
                             <button onclick="Update(${elemento.id})">Editar</button>
@@ -114,8 +127,10 @@
   function Update(id){
     let resultado = listaDeProfissionais.find(obj => obj.id === id);
     let html = `<input type="text" id="nomeParaEditar" placeholder = "Nome">
-                        <input type="text" id="profissaoParaEditar" placeholder = "Profissão">
                         <input type="text" id="crpParaEditar" placeholder = "CRP">
+                        <input type="text" id="modalidadeParaEditar" placeholder = "Modalidade">
+                        <input type="text" id="linkParaEditar" placeholder = "Link Instagram">
+                        <input type="text" id="numeroParaEditar" placeholder = "Número">
                         <input type="text" id="contatoParaEditar" placeholder = "Contato">
                         <button onclick="editarDados(${id})">Editar</button>`;
     let divEditar = document.getElementById('editar');
@@ -124,13 +139,17 @@
 
   function editarDados(id){
     let nome = document.getElementById("nomeParaEditar").value;
-    let profissao = document.getElementById("profissaoParaEditar").value;
     let crp = document.getElementById("crpParaEditar").value;
+    let modalidade = document.getElementById("modalidadeParaEditar").value;
+    let numero = document.getElementById("linkParaEditar").value;
+    let link = document.getElementById("numeroParaEditar").value;
     let contato = document.getElementById("contatoParaEditar").value;
     let resultado = listaDeProfissionais.find(obj => obj.id === id);
     resultado.nome = nome;
-    resultado.profissao = profissao;
     resultado.crp = crp;
+    resultado.modalidade = modalidade;
+    resultado.link = link;
+    resultado.numero = numero;
     resultado.contato = contato;
     Retrieve();
     let divEditar = document.getElementById('editar');
