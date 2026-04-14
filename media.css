@@ -8,7 +8,8 @@
     }
 
     h2{
-        font-size: 38px;
+        font-size: 40px;
+        line-height: 1;
     }
 
     form{
@@ -19,9 +20,4 @@
         widgth: 100px;
         margin-top: 100px;
     }
-
-    a{
-        font-size: 10px;
-    }
-
 }

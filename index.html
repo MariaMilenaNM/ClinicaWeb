@@ -3,135 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link href="style.css" rel="stylesheet" >
+  <link href="media.css" rel="stylesheet"> 
   <title>Clínica Virtual</title>
 </head>
 
-<style>
-  body{
-    background-color: rgb(251, 251, 251);
-    color: rgb(2, 2, 65);
-    font-family: Verdana;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px;
-  }
-
-  header {
-    font-family: Verdana;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  #title{
-    flex-direction: column;
-    line-height:10px;
-  }
-
-  li{
-    display: inline-block;
-    margin: 20px;
-  }
-
-  main{
-    display: flex;
-    flex-direction: row;
-    margin-top: 50px;
-  }
-
-  ul{
-
-  }
-
-  p{
-    line-height: 20px;
-    max-width: 500px;
-    font-family: Verdana;
-  }
-
-  img{
-    width: 300px;
-    height: 300px;
-    object-position: center top;
-  }
-
-  a{
-    color: rgb(23, 23, 138);
-  }
-
-  a:hover{
-    color: black;
-    transition: 0.3 all;
-  }
-
-  input {
-    padding: 5px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease;
-  }
-
-  h1{
-    font-size: 200;
-  }
-
-  h2{
-    font-size: 60;
-    line-height: 10px;
-    font-family: Verdana;
-  }
-
-  h3{
-    color: black;
-  }
-
-  span{
-    color:rgb(23, 23, 138);
-  }
-
-  p{
-    font-size: 20px;
-  }
-
-  button{
-    background-color: rgb(2, 2, 65);
-    color:white;
-    border: none;
-    font-family: Verdana;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: white;
-  }
-
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-
-  th, td {
-    padding: 12px;
-    text-align: left;
-  }
-
-  th {
-    background-color: rgb(2, 2, 65);
-    color: white;
-  }
-
-</Style>
 
 <body>
 <header>
@@ -145,7 +21,7 @@
     <a href="#"><li>Serviço</li></a>
     <a href="#"><li>Sobre</li></a>
     <a href="#"><li>Contato</li></a>
-    <a href="pacientes.html"><li>Já tem uma conta?</li></a>
+    <a href="pacientes.html" id="inscrevaButton"><li>Já tem uma conta?</li></a>
   </ul>
 </header>
 
