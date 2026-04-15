@@ -59,7 +59,7 @@
 
   input {
     padding: 5px;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 14px;
     outline: none;

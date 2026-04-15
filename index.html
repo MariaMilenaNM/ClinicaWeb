@@ -36,7 +36,7 @@
       <input id="crp" type="number" placeholder="CRP"/>
       <input id="modalidade" type="text" placeholder="Modalidade"/>
       <input id="link" type="text" placeholder="Link Instagram"/>
-      <input id="numero" type="text" placeholder="Número"/>
+      <input id="numero" type="number" placeholder="Número"/>
       <input id="contato" type="email" placeholder="E-mail"/>
       <button type="button" onclick="Create()">Salvar</button>
     </form>
@@ -83,6 +83,11 @@
     let link = document.getElementById("link").value;
     let numero = document.getElementById("numero").value;
     let contato = document.getElementById("contato").value;
+
+    if (nome === "" || crp === "" || modalidade === "" || link === "" || numero === "" || contato === "") {
+    alert("Por favor, preencha todos os campos.");
+    return;
+}
 
     let entradaObj = {
       id: index,
