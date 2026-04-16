@@ -67,19 +67,23 @@
 
   function cadastrarDados() {
     let nome = document.getElementById('nome').value;
-    if (nome === "") {
-      alert("Por favor, preencha o nome.");
-      return;
-    }
+    let data = document.getElementById('data').value;
+    let email = document.getElementById('email').value;
+    let contato = document.getElementById('contato').value;
+    if (nome === "" || data === "" || email === "" || contato === "") {
+          alert("Por favor, preencha todos os campos.");
+          return;
+        }
 
     let paciente = {
       nome: nome,
-      data: document.getElementById('data').value,
-      email: document.getElementById('email').value,
-      contato: document.getElementById('contato').value,
+      data: data,
+      email: email,
+      contato: contato,
       mod: document.getElementById('mod').checked ? "Remota" :
         document.getElementById('mod2').checked ? "Presencial" : "Não definida"
     };
+
 
     if (indexEdicao !== null) {
       listaPacientes[indexEdicao] = paciente;
