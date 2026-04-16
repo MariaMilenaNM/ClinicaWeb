@@ -44,23 +44,6 @@
   <button id="btnSalvar" onclick="cadastrarDados()">Cadastrar</button>
 </div>
 
-<details style="margin-top: 20px; width: 100%; max-width: 800px;">
-  <summary style="cursor: pointer; font-weight: bold; text-align: center;">Clique para ver a lista de pacientes</summary>
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Data</th>
-      <th>Email</th>
-      <th>Contato</th>
-      <th>Modalidade</th>
-      <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody id="tabelaPacientes"></tbody>
-  </table>
-</details>
-
 <script>
   let listaPacientes = [];
   let indexEdicao = null;
@@ -97,7 +80,7 @@
     limparCadastro();
   }
 
-  function exibirDados() {
+  /*function exibirDados() {
     let tbody = document.getElementById('tabelaPacientes');
     let html = "";
 
@@ -144,7 +127,7 @@
       exibirDados();
     }
   }
-
+*/
   function limparCadastro() {
     document.getElementById('nome').value = "";
     document.getElementById('data').value = "";
