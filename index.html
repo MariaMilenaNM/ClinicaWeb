@@ -1,36 +1,207 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="style.css" rel="stylesheet" >
-  <link href="media.css" rel="stylesheet"> 
-  <title>Clínica Virtual</title>
+  <title>MentiS - Clínica Virtual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-<header>
-  <div id="title">
-    <h3>Clínica Virtual</h3> 
-    <h1>MS</h1> 
-  </div>
 
-  <ul>
-    <a href="#"><li>Início</li></a>
-    <a href="#"><li>Serviço</li></a>
-    <a href="#"><li>Sobre</li></a>
-    <a href="#"><li>Contato</li></a>
-    <a href="pacientes.html" id="inscrevaButton"><li>Já tem uma conta?</li></a>
-  </ul>
-</header>
+  <header>
+    <div id="marca">
+      <img src="imagens/LogoBranca.png" alt="Logo MentiS" class="logo-imagem">
+      <div id="textos-marca">
+        <h1>MentiS</h1> 
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">QUEM SOMOS?</a></li>
+        <li><a href="#">FAZER LOGIN</a></li>
+        <li><a href="pacientes.html" id="inscrevaButton">CADASTRE-SE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main>
-  <aside>
-    <h2><span>Veja nossos profissionais</span></h2>
-    <h2>na Mentis</h2>
-    <p>Venha fazer parte dela. Cadastre-se! </p>
+  <section class="hero">
+    <div class="hero-texto">
+      <h2>Encontre o apoio ideal para</h2>
+      <h2>sua mente com a <span class="light">MentiS</span></h2>
+      <p>Encontrar o profissional certo não precisa ser um desafio. Nossa plataforma une você a psicólogos verificados de forma simples e segura. Navegue pelos perfis e cuide da sua saúde mental no seu ritmo.</p>
+      <a href="#" class="btn-encontrar">ENCONTRE SEU PSICÓLOGO</a>
+    </div>
+    <div class="imagem-direita"> 
+      <img src="imagens/ConversaPsicologo.png" alt="Ilustração terapia">     
+    </div>
+  </section>
 
+  <section class="caracteristicas">
+    <div class="grade">
+      <div class="card">
+        <div class="imgm">
+          <img src="imagens/Card1.png" alt="Profissional Certo">
+        </div>
+        <div class="corpo">
+          <h3>Profissional Certo</h3>
+          <p>Encontre o psicólogo ideal para o seu momento de vida, navegando por perfis focados no que você realmente busca.</p>
+        </div>
+      </div>
+   
+      <div class="card">
+        <div class="imgm">
+          <img src="imagens/Card2.jpg" alt="Terapia do Seu Jeito">
+        </div>
+        <div class="corpo">
+          <h3>Terapia do Seu Jeito</h3>
+          <p>O conforto de casa ou o ambiente do consultório? Descubra profissionais com a modalidade que melhor se adapta a você.</p>
+        </div>
+      </div>
+   
+      <div class="card">
+        <div class="imgm">
+          <img src="imagens/Card3.jpg" alt="Conexão Direta">
+        </div>
+        <div class="corpo">
+          <h3>Conexão Direta</h3>
+          <p>Nossa plataforma liga você diretamente ao contato do profissional escolhido, sem intermediários.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="profissionais">
+<h2>CONHEÇA OS PROFISSIONAIS</h2>
+    <div class="grade-profissionais">
+      <div class="card-profissional">
+        <div class="foto-placeholder"></div>
+        <h4>NOME</h4>
+        <p>ESPECIALIDADE(S)</p>
+        <div class="badges">
+          <span class="badge online">ONLINE</span>
+          <span class="badge presencial">PRESENCIAL</span>
+        </div>
+      </div>
+      <div class="card-profissional">
+        <div class="foto-placeholder"></div>
+        <h4>NOME</h4>
+        <p>ESPECIALIDADE(S)</p>
+        <div class="badges">
+          <span class="badge online">ONLINE</span>
+          <span class="badge presencial">PRESENCIAL</span>
+        </div>
+      </div>
+      <div class="card-profissional">
+        <div class="foto-placeholder"></div>
+        <h4>NOME</h4>
+        <p>ESPECIALIDADE(S)</p>
+        <div class="badges">
+          <span class="badge online">ONLINE</span>
+          <span class="badge presencial">PRESENCIAL</span>
+        </div>
+      </div>
+      <div class="card-profissional">
+        <div class="foto-placeholder"></div>
+        <h4>NOME</h4>
+        <p>ESPECIALIDADE(S)</p>
+        <div class="badges">
+          <span class="badge online">ONLINE</span>
+          <span class="badge presencial">PRESENCIAL</span>
+        </div>
+      </div>
+      <div class="card-profissional">
+        <div class="foto-placeholder"></div>
+        <h4>NOME</h4>
+        <p>ESPECIALIDADE(S)</p>
+        <div class="badges">
+          <span class="badge online">ONLINE</span>
+          <span class="badge presencial">PRESENCIAL</span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-container">
+      <a href="#" class="btn-dark">PROCURE POR PROFISSIONAIS</a>
+    </div>
+      <!-- Acrescentar pra aparecer esses cards apenas quando atualizar um profissional com o crud (vou ajustar isso dps)   
+    <div class="grade-profissionais" id="grid-profissionais">
+      </div>
+
+    <div class="btn-container">
+      <a href="#" class="btn-dark">PROCURE POR PROFISSIONAIS</a>
+    </div> -->
+  </section>
+
+  <section class="trust-section">
+    <div class="trust-bar">
+      <div class="trust-item">
+        <span class="material-icons">verified_user</span>
+        <span class="tlabel">Profissionais com CRP verificado</span>
+      </div>
+      <div class="trust-item">
+        <span class="material-icons">lock</span>
+        <span class="tlabel">Ambiente seguro</span>
+      </div>
+      <div class="trust-item">
+        <span class="material-icons">favorite_border</span>
+        <span class="tlabel">Respeito à sua história</span>
+      </div>
+    </div>
+  </section>
+
+<!-- aqui tem que colocar o details pra mostrar as respostas das perguntas (de noite eu faço)-->  
+  <section class="faq-section">
+    <div class="faq-container">
+      <div class="faq-left">
+        <span class="material-icons icon-large">help_outline</span>
+        <div class="faq-title-block">
+          <div class="t1">FAQ</div>
+          <div class="t2">Dúvidas Frequentes</div>
+        </div>
+      </div>
+      <div class="faq-right">
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Como escolho o psicólogo ideal?</span>
+            <span class="material-icons">expand_more</span>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Como funciona o agendamento remoto?</span>
+            <span class="material-icons">expand_more</span>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Como posso buscar especialidades dos profissionais?</span>
+            <span class="material-icons">expand_more</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#" class="logo-footer">
+      <img src="imagens/LogoBranca.png" alt="logo" class="logo-imagem-footer">
+      MentiS
+    </a>
+    <ul class="footer-links">
+      <li><a href="#">SOBRE NÓS</a></li>
+      <li><span class="sep">|</span></li>
+      <li><a href="#">TERMOS DE USO</a></li>
+      <li><span class="sep">|</span></li>
+      <li><a href="#">POLÍTICA DE PRIVACIDADE</a></li>
+      <li><span class="sep">|</span></li>
+      <li><a href="#">CONTATO</a></li>
+    </ul>
+  </footer>
+
+<!--
     <form>
       <input id="nome" type="text" placeholder="Nome"/>
       <input id="crp" type="number" placeholder="CRP"/>
@@ -63,14 +234,7 @@
       </div>
     </details>
     <div id="editar"></div>
-
-  </aside>
-
-
-  <article>
-    <img src='https://www.psicologosberrini.com.br/wp-content/uploads/servicos-de-psicologia-1017x1024.png'>
-  </article>
-</main>
+-->
 
 <script>
   let listaDeProfissionais =[];
@@ -166,8 +330,6 @@
     listaDeProfissionais = novaLista;
     Retrieve();
   };
-
-
 </script>
 </body>
 </html>
