@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    background-color: #020241;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -64,7 +64,10 @@ button:hover {
 }
 
 .btn-sair {
-    color: #b71c1c;
+    color: white;
+    background-color: #b71c1c;
+    border: none;
+    border-radius: 5px;
     text-decoration: none;
     width: auto;
     padding: 5px 10px;
@@ -74,7 +77,7 @@ button:hover {
 }
 
 .btn-sair:hover {
-    color: #808080;
+    color: black;
 }
 
 table {
