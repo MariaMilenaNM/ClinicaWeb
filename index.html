@@ -152,7 +152,6 @@
     </div>
   </section>
 
-<!-- aqui tem que colocar o details pra mostrar as respostas das perguntas (de noite eu faço)-->  
   <section class="faq-section">
     <div class="faq-container">
       <div class="faq-left">
@@ -163,26 +162,35 @@
         </div>
       </div>
       <div class="faq-right">
-        <div class="faq-item">
-          <div class="faq-q">
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
             <span>Como escolho o psicólogo ideal?</span>
-            <span class="material-icons">expand_more</span>
-          </div>
+            <span class="material-icons seta-icone">expand_more</span>
+          </summary>  
+        <div class="faq-a-content">
+            <p class = "faq-a">Use os filtros de especialidade, modalidade de atendimento e disponibilidade para encontrar o melhor profissional para você.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q">
+        </details>
+
+        <details class="faq-item" name="faq">
+        <summary class="faq-q">
             <span>Como funciona o agendamento remoto?</span>
-            <span class="material-icons">expand_more</span>
-          </div>
+            <span class="material-icons seta-icone">expand_more</span>
+        </summary> 
+        <div class="faq-a-content">
+          <p class="faq-a">Após escolher o profissional, você é direcionado diretamente para o contato dele. O agendamento é feito sem intermediários, de forma simples e rápida.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q">
+      </details>
+
+      <details class="faq-item" name="faq">
+          <summary class="faq-q">
             <span>Como posso buscar especialidades dos profissionais?</span>
-            <span class="material-icons">expand_more</span>
-          </div>
-        </div>
+            <span class="material-icons seta-icone">expand_more</span>
+          </summary>
+        <div class="faq-a-content">
+          <p class="faq-a">Cada perfil exibe as especialidades do profissional. Você pode filtrar por área de atuação diretamente na busca para encontrar quem atende sua necessidade específica.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <footer>

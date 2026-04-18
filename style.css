@@ -358,15 +358,51 @@ nav a:hover {
   gap: 20px;
 }
 
+.faq-item {
+  border-bottom: 1px solid #E5E7EB;
+  margin-bottom: 16px;
+}
+
 .faq-q {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 12px;
-  border-bottom: 1px solid #E5E7EB;
   cursor: pointer;
   font-size: 15px;
   font-weight: 400;
   color: var(--dark-blue);
+  list-style: none;
+}
+
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.seta-icone {
+  transition: transform 0.3s ease;
+}
+
+details[open] .seta-icone {
+  transform: rotate(180deg);
+  color: var(--light-blue); 
+}
+
+.faq-a-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+details[open] .faq-a-content {
+  max-height: 200px; 
+}
+
+.faq-a {
+  font-size: 14px;
+  color: var(--gray-blue);
+  line-height: 1.6;
+  padding-bottom: 16px;
 }
 
 /* -- FOOTER -- */
