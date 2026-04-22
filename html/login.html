@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Mentis</title>
+    <link href="../style/login.css" rel="stylesheet">
+</head>
+<body>
+
+<a href="index.html" class="btn-sair">Sair</a>
+
+<div id="telaAuth">
+
+    <div class="auth-card">
+        <div class="auth-logo">MS</div>
+        <h1 id="authTitulo">Área do Paciente</h1>
+        <p id="authSubtitulo">Acesse sua conta Mentis</p>
+
+        <div id="formLogin">
+            <div class="campo">
+                <label>E-mail</label>
+                <input type="email" id="loginEmail" placeholder="seu@email.com">
+            </div>
+            <div class="campo">
+                <label>Senha</label>
+                <input type="password" id="loginSenha" placeholder="••••••••">
+            </div>
+            <button onclick="fazerLogin()">Entrar</button>
+            <p class="auth-link">Primeira vez aqui? <span onclick="mostrarCadastro()">Criar conta</span></p>
+        </div>
+
+        <div id="formCadastro" style="display:none;">
+            <div class="campo">
+                <label>Nome completo</label>
+                <input type="text" id="cadNome" placeholder="Seu nome">
+            </div>
+            <div class="campo">
+                <label>Data de nascimento</label>
+                <input type="date" id="cadData">
+            </div>
+            <div class="campo">
+                <label>E-mail</label>
+                <input type="email" id="cadEmail" placeholder="seu@email.com">
+            </div>
+            <div class="campo">
+                <label>Telefone</label>
+                <input type="tel" id="cadTelefone" placeholder="(81) 99999-9999">
+            </div>
+            <div class="campo">
+                <label>Cidade</label>
+                <input type="text" id="cadCidade" placeholder="Ex: Caruaru">
+            </div>
+            <div class="campo">
+                <label>Estado</label>
+                <select id="cadEstado">
+                    <option value="">Selecione...</option>
+                    <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                    <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                    <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                    <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                    <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                    <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                    <option>SP</option><option>SE</option><option>TO</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Senha</label>
+                <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres">
+            </div>
+            <div class="campo">
+                <label>Confirmar senha</label>
+                <input type="password" id="cadSenhaConf" placeholder="Repita a senha">
+            </div>
+            <button onclick="cadastrar()">Criar conta</button>
+            <p class="auth-link">Já tem conta? <span onclick="mostrarLogin()">Entrar</span></p>
+        </div>
+    </div>
+
+</div>
+
+<script src="../crudjs/login.js"></script>
+
+</body>
+</html>
