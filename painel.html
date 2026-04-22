@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel – Mentis</title>
+    <link href="painel.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="painel-wrapper">
+
+    <aside class="sidebar" id="sidebar">
+
+        <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Recolher painel">&#9776;</button>
+
+        <div class="sidebar-conteudo" id="sidebarConteudo">
+            <div class="avatar" id="avatarLetra">?</div>
+            <h2 class="sidebar-nome" id="sidebarNome">–</h2>
+            <span class="sidebar-tag">Paciente Mentis</span>
+
+            <hr class="sidebar-divider">
+
+            <div class="info-item">
+                <span class="info-label">E-MAIL</span>
+                <span class="info-valor" id="sidebarEmail">–</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">TELEFONE</span>
+                <span class="info-valor" id="sidebarTelefone">–</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">NASCIMENTO</span>
+                <span class="info-valor" id="sidebarData">–</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">CIDADE / ESTADO</span>
+                <span class="info-valor" id="sidebarLocal">–</span>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <button class="btn-editar" onclick="toggleEdicao()">Editar Perfil</button>
+
+            <div id="formEditar" style="display:none; margin-top:14px;">
+                <div class="campo-edit">
+                    <label>Nome</label>
+                    <input type="text" id="editNome">
+                </div>
+                <div class="campo-edit">
+                    <label>Telefone</label>
+                    <input type="tel" id="editTelefone">
+                </div>
+                <div class="campo-edit">
+                    <label>Cidade</label>
+                    <input type="text" id="editCidade">
+                </div>
+                <div class="campo-edit">
+                    <label>Estado</label>
+                    <select id="editEstado">
+                        <option value="">Selecione...</option>
+                        <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                        <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                        <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                        <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                        <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                        <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                        <option>SP</option><option>SE</option><option>TO</option>
+                    </select>
+                </div>
+                <button class="btn-salvar-edit" onclick="salvarEdicao()">Salvar</button>
+                <button class="btn-cancelar-edit" onclick="toggleEdicao()">Cancelar</button>
+            </div>
+
+            <button class="btn-sair" onclick="sair()">Sair da Conta</button>
+        </div>
+
+    </aside>
+
+    <main class="painel-main">
+        <div class="painel-header">
+            <h1>Profissionais Disponíveis</h1>
+            <p>Encontre o psicólogo ideal para o seu atendimento em nossa rede de parceiros.</p>
+
+            <!--  depois a gente ve oq faz -->
+        </div>
+
+        <div class="cards-grid" id="cardsGrid">
+            <p class="sem-dados">Nenhum profissional cadastrado ainda.</p>
+        </div>
+
+        <div class="paginacao" id="paginacao"></div>
+    </main>
+
+</div>
+
+<script>
+
+    let pacienteLogado = JSON.parse(localStorage.getItem('pacienteLogado'));
+
+    if (!pacienteLogado) {
+        window.location.href = 'login.html';
+    }
+
+    let todosPsicologos = [];
+    const ITENS_POR_PAGINA = 6;
+    let paginaAtual = 1;
+
+    window.onload = function() {
+        atualizarSidebar();
+        carregarPsicologos();
+    };
+
+    function atualizarSidebar() {
+        let p = pacienteLogado;
+        document.getElementById('avatarLetra').innerText   = p.nome.charAt(0).toUpperCase();
+        document.getElementById('sidebarNome').innerText   = p.nome;
+        document.getElementById('sidebarEmail').innerText  = p.email;
+        document.getElementById('sidebarTelefone').innerText = p.telefone;
+        document.getElementById('sidebarData').innerText   = formatarData(p.data);
+        document.getElementById('sidebarLocal').innerText  = p.cidade + ' / ' + p.estado;
+    }
+
+    function formatarData(data) {
+        if (!data) return '–';
+        let partes = data.split('-');
+        return partes[2] + '/' + partes[1] + '/' + partes[0];
+    }
+
+    let sidebarAberta = true;
+
+    function toggleSidebar() {
+        let sidebar  = document.getElementById('sidebar');
+        let conteudo = document.getElementById('sidebarConteudo');
+        sidebarAberta = !sidebarAberta;
+        if (sidebarAberta) {
+            sidebar.classList.remove('sidebar-fechada');
+            conteudo.style.display = 'block';
+        } else {
+            sidebar.classList.add('sidebar-fechada');
+            conteudo.style.display = 'none';
+        }
+    }
+
+    function toggleEdicao() {
+        let form = document.getElementById('formEditar');
+        let visivel = form.style.display === 'block';
+        if (!visivel) {
+            document.getElementById('editNome').value     = pacienteLogado.nome;
+            document.getElementById('editTelefone').value = pacienteLogado.telefone;
+            document.getElementById('editCidade').value   = pacienteLogado.cidade;
+            document.getElementById('editEstado').value   = pacienteLogado.estado;
+        }
+        form.style.display = visivel ? 'none' : 'block';
+    }
+
+    function salvarEdicao() {
+        let novoNome     = document.getElementById('editNome').value.trim();
+        let novoTelefone = document.getElementById('editTelefone').value.trim();
+        let novaCidade   = document.getElementById('editCidade').value.trim();
+        let novoEstado   = document.getElementById('editEstado').value;
+
+        if (!novoNome || !novoTelefone || !novaCidade || !novoEstado) {
+            alert('Preencha todos os campos para salvar.');
+            return;
+        }
+
+        let pacientes = JSON.parse(localStorage.getItem('pacientes') || '[]');
+        let idx = pacientes.findIndex(p => p.email === pacienteLogado.email);
+        pacientes[idx].nome     = novoNome;
+        pacientes[idx].telefone = novoTelefone;
+        pacientes[idx].cidade   = novaCidade;
+        pacientes[idx].estado   = novoEstado;
+        localStorage.setItem('pacientes', JSON.stringify(pacientes));
+
+        pacienteLogado.nome     = novoNome;
+        pacienteLogado.telefone = novoTelefone;
+        pacienteLogado.cidade   = novaCidade;
+        pacienteLogado.estado   = novoEstado;
+        localStorage.setItem('pacienteLogado', JSON.stringify(pacienteLogado));
+
+        atualizarSidebar();
+        toggleEdicao();
+        alert('Perfil atualizado!');
+    }
+
+    function carregarPsicologos() {
+        todosPsicologos = JSON.parse(localStorage.getItem('profissionais') || '[]');
+        paginaAtual = 1;
+        renderizarCards();
+    }
+
+    function renderizarCards() {
+        let grid = document.getElementById('cardsGrid');
+
+        if (todosPsicologos.length === 0) {
+            grid.innerHTML = '<p class="sem-dados">Nenhum profissional cadastrado ainda.</p>';
+            document.getElementById('paginacao').innerHTML = '';
+            return;
+        }
+
+        let inicio = (paginaAtual - 1) * ITENS_POR_PAGINA;
+        let fim    = inicio + ITENS_POR_PAGINA;
+        let pagina = todosPsicologos.slice(inicio, fim);
+
+        let html = '';
+        pagina.forEach(p => {
+            let letra = p.nome ? p.nome.charAt(0).toUpperCase() : '?';
+            let linkInsta = p.link ? p.link.replace('@', '') : '';
+            html += `
+        <div class="psi-card">
+          <div class="psi-avatar">${letra}</div>
+          <div class="psi-info">
+            <h3 class="psi-nome">${p.nome}</h3>
+            <span class="psi-crp">CRP: ${p.crp}</span>
+            <span class="psi-modalidade tag-${p.modalidade === 'Presencial ' +
+            'e Remota' ? 'ambas' : p.modalidade.toLowerCase()}">${p.modalidade}</span>
+            <p class="psi-contato"> ${p.contato}</p>
+            <p class="psi-contato"> ${p.numero}</p>
+          </div>
+          <a href="https://instagram.com/${linkInsta}" target="_blank" class="psi-btn-insta">
+            Ver Instagram
+          </a>
+        </div>`;
+        });
+
+        grid.innerHTML = html;
+        renderizarPaginacao();
+    }
+
+    function renderizarPaginacao() {
+        let totalPaginas = Math.ceil(todosPsicologos.length / ITENS_POR_PAGINA);
+        let div = document.getElementById('paginacao');
+
+        if (totalPaginas <= 1) {
+            div.innerHTML = '';
+            return;
+        }
+
+        let html = '';
+        for (let i = 1; i <= totalPaginas; i++) {
+            html += `<button class="pag-btn ${i === paginaAtual ? 'pag-ativa' : ''}"
+                       onclick="irParaPagina(${i})">${i}</button>`;
+        }
+        div.innerHTML = html;
+    }
+
+    function irParaPagina(num) {
+        paginaAtual = num;
+        renderizarCards();
+        document.getElementById('cardsGrid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function sair() {
+        localStorage.removeItem('pacienteLogado');
+        window.location.href = 'index.html';
+    }
+
+</script>
+</body>
+</html>
