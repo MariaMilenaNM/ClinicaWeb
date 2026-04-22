@@ -2,8 +2,8 @@
   
   header {
     flex-direction: column;
-    padding: 15px 10px; 
-    gap: 15px; 
+    padding: 20px 15px; 
+    gap: 25px; 
   }
 
   #marca {
@@ -33,15 +33,14 @@
   }
 
   #inscrevaButton {
-    padding: 8px 24px; 
+    padding: 10px 24px; 
     font-size: 12px;
-    margin-top: 5px; 
+    margin-top: 10px; 
   }
 
   .hero {
-    flex-direction: column;
-    padding: 40px 20px;
-    text-align: center;
+    padding: 30px 20px;
+    text-align: left;
   }
 
   .hero-texto {
@@ -49,12 +48,28 @@
   }
 
   .hero-texto h2 {
-    font-size: 32px;
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .hero-texto p{
+    font-size: 15px;
+    margin: 15px 0 25px 0;
   }
 
   .imagem-direita {
     max-width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+  }
+
+  .btn-encontrar{
+    width: 270px;
+    padding: 10px 24px; 
+    font-size: 10px;
+    margin-top: 10px; 
   }
 
   .caracteristicas {
@@ -64,6 +79,7 @@
   .grade {
     flex-direction: column;
     align-items: center;
+    gap: 30px;
   }
 
   .card {
@@ -120,6 +136,7 @@
     display: none;
   }
 
+  /*
   main {
     flex-direction: column;
   }
@@ -139,4 +156,5 @@
     width: 100px;
     margin-top: 20px;
   }
+    */
 }

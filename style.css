@@ -442,6 +442,10 @@ footer {
   font-weight: 300;
 }
 
+.footer-links a:hover{
+  color: var(--light-blue);
+}
+
 /*
   input {
     padding: 5px;
