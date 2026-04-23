@@ -1,7 +1,7 @@
     let pacienteLogado = JSON.parse(localStorage.getItem('pacienteLogado'));
 
     if (!pacienteLogado) {
-        window.location.href = 'login.html';
+        window.location.href = 'paciente.html';
     }
 
     let todosPsicologos = [];

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Mentis</title>
+    <link href="../style/login.css" rel="stylesheet">
+</head>
+<body>
+
+<a href="index.html" class="btn-sair">Sair</a>
+
+<div class="card">
+    <section id="telaR">
+        <h2>Registre-se como psicólogo na nossa clínica</h2>
+
+        <form>
+            <input id="nome" type="text" placeholder="Nome"/>
+            <input id="crp" type="number" placeholder="CRP"/>
+
+            <div>
+                <label style="font-weight:bold; display: block; margin-bottom: 5px;">Modalidade</label>
+                <input type="checkbox" id="modPresencial"> Presencial
+                <input type="checkbox" id="modRemota" style="margin-left: 10px;"> Remota
+            </div>
+
+            <input id="link" type="text" placeholder="Link Instagram"/>
+            <input id="numero" type="number" placeholder="Número"/>
+            <input id="contato" type="email" placeholder="E-mail"/>
+
+            <button type="button" onclick="Create()">Salvar</button>
+        </form>
+
+        <details style="margin-top: 40px; width: 100%; max-width: 800px;">
+            <summary style="cursor: pointer; font-weight: bold; text-align: center; font-size: 18px; color: #FFFFFF; padding: 10px;">
+                Aqui você pode ver nossos profissionais disponíveis
+            </summary>
+
+            <div id="tabeladiv" style="overflow-x: auto; margin-top: 20px;">
+                <table id="tabela" style="width: 100%; text-align: left; border-collapse: collapse;">
+                    <thead>
+                    <tr style="border-bottom: 2px solid #ccc;">
+                        <th>Nome</th>
+                        <th>CRP</th>
+                        <th>Modalidade</th>
+                        <th>Link</th>
+                        <th>Número</th>
+                        <th>E-mail</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="resultados"></tbody>
+                </table>
+            </div>
+        </details>
+        <div id="editar" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 400px;"></div>
+    </section>
+
+</div>
+
+<script src="../crudjs/crudProfissional.js"></script>
+<script src="../js/profissional.js"></script>
+</body>
+</html>

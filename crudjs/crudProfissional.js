@@ -31,7 +31,6 @@ function atualizarProfissionalBd(id, dadosAtualizados) {
     }
 }
 
-
 function deletarProfissionalBd(id) {
     let lista = getProfissionais();
     let novaLista = lista.filter(obj => obj.id !== id);

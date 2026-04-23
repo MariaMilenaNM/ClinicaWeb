@@ -1,18 +1,95 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* PROFISSIONAIS */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background-color: #0A0B26;
+    margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
+    align-items: center;
+    padding: 20px;
 }
+
+.card {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    color: #0A0B26;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px;
+    background-color: #0A0B26;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1a1c4d;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding: 15px;
+    background: #0A0B26;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: rgba(255,255,255,0.1);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    text-align: left;
+}
+
+.btn-sair {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    text-decoration: none;
+    background: #d9534f;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+/* PACIENTE */
 
 #telaAuth {
     width: 100%;

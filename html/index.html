@@ -23,7 +23,7 @@
   <nav>
     <ul>
       <li><a href="#">QUEM SOMOS?</a></li>
-      <li><a href="login.html" id="inscrevaButton">FAÇA LOGIN</a></li>
+      <li><a href="paciente.html" id="inscrevaButton">FAÇA LOGIN</a></li>
     </ul>
   </nav>
 </header>
@@ -33,7 +33,7 @@
     <h2>Encontre o apoio ideal para</h2>
     <h2>sua mente com a <span class="light">MentiS</span></h2>
     <p>Encontrar o profissional certo não precisa ser um desafio. Nossa plataforma une você a psicólogos verificados de forma simples e segura. Navegue pelos perfis e cuide da sua saúde mental no seu ritmo.</p>
-    <a href="#" class="btn-encontrar">ENCONTRE SEU PSICÓLOGO</a>
+    <a href="profissional.html" class="btn-encontrar">REGISTRE-SE COMO PSICÓLOGO</a>
   </div>
   <div class="imagem-direita">
     <img src="../imagens/ConversaPsicologo.png" alt="Ilustração terapia">
@@ -152,47 +152,6 @@
         </div>
       </section>
 
-      <section style="display: flex; flex-direction: column; align-items: center; padding: 40px 20px;">
-        <h2>Cadastre um Novo Profissional</h2>
-        <form style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 400px; margin-top: 20px;">
-          <input id="nome" type="text" placeholder="Nome"/>
-          <input id="crp" type="number" placeholder="CRP"/>
-          <label style="font-weight:bold; font-size:0.9em; margin-top: 10px;">Modalidade</label>
-          <div style="margin: 4px 0 8px;">
-            <input type="checkbox" id="modPresencial"> Presencial;
-            <input type="checkbox" id="modRemota"> Remota
-          </div>
-          <input id="link" type="text" placeholder="Link Instagram"/>
-          <input id="numero" type="number" placeholder="Número"/>
-          <input id="contato" type="email" placeholder="E-mail"/>
-          <button type="button" onclick="Create()" style="padding: 10px; cursor: pointer;">Salvar</button>
-        </form>
-
-        <details style="margin-top: 40px; width: 100%; max-width: 800px;">
-          <summary style="cursor: pointer; font-weight: bold; text-align: center; font-size: 18px; color: #0A0B26; padding: 10px;">
-            Aqui você pode ver nossos profissionais disponíveis
-          </summary>
-
-          <div id="tabeladiv" style="overflow-x: auto; margin-top: 20px;">
-            <table id="tabela" style="width: 100%; text-align: left; border-collapse: collapse;">
-              <thead>
-              <tr style="border-bottom: 2px solid #ccc;">
-                <th>Nome</th>
-                <th>CRP</th>
-                <th>Modalidade</th>
-                <th>Link</th>
-                <th>Número</th>
-                <th>E-mail</th>
-                <th>Ações</th>
-              </tr>
-              </thead>
-              <tbody id="resultados"></tbody>
-            </table>
-          </div>
-        </details>
-        <div id="editar" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 400px;"></div>
-      </section>
-
       <footer>
         <a href="#" class="logo-footer">
           <img src="../imagens/LogoBranca.png" alt="logo" class="logo-imagem-footer">
@@ -208,9 +167,6 @@
           <li><a href="#">CONTATO</a></li>
         </ul>
       </footer>
-
-<script src="../crudjs/crudIndex.js"></script>
-<script src="../js/index.js"></script>
 
 </body>
 </html>
