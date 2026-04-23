@@ -37,20 +37,17 @@
 
         let pacientes = JSON.parse(localStorage.getItem('pacientes') || '[]');
 
-        let jaExiste = pacientes.find(p => p.email === email);
-        if (jaExiste) {
+        let resultado = cadastrarPaciente(nome, data, email, telefone, cidade, estado, senha);
+        if (resultado === 'duplicado') {
             alert('Já existe uma conta com este e-mail. Faça login.');
             mostrarLogin();
             return;
         }
 
-        let novoPaciente = { nome, data, email, telefone, cidade, estado, senha };
-        pacientes.push(novoPaciente);
-        localStorage.setItem('pacientes', JSON.stringify(pacientes));
-
         alert('Conta criada com sucesso! Faça login.');
         mostrarLogin();
     }
+
 
     function fazerLogin() {
         let email = document.getElementById('loginEmail').value.trim();
@@ -61,14 +58,11 @@
             return;
         }
 
-        let pacientes = JSON.parse(localStorage.getItem('pacientes') || '[]');
-        let encontrado = pacientes.find(p => p.email === email && p.senha === senha);
-
+        let encontrado = buscarPaciente(email, senha);
         if (!encontrado) {
-            alert('E-mail ou senha incorretos.');
-            return;
+            alert('E-mail ou senha incorretos.'); return;
         }
 
         localStorage.setItem('pacienteLogado', JSON.stringify(encontrado));
         window.location.href = 'painel.html';
-    }
+        }

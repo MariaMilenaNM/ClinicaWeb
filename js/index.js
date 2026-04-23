@@ -1,8 +1,3 @@
-     let listaDeProfissionais = JSON.parse(localStorage.getItem('profissionais') || '[]');
-        let index = listaDeProfissionais.length > 0
-                ? Math.max(...listaDeProfissionais.map(p => p.id)) + 1
-                : 0;
-
         Retrieve();
 
         function Create(){
@@ -24,20 +19,11 @@
             return;
           }
 
-          let entradaObj = {
-            id: index,
-            nome: nome,
-            crp: crp,
-            modalidade: modalidade,
-            link: link,
-            numero: numero,
-            contato: contato
-          }
-          index++;
-          listaDeProfissionais.push(entradaObj);
-          localStorage.setItem('profissionais', JSON.stringify(listaDeProfissionais));
+          let dadosProfissional = { nome, crp, modalidade, link, numero, contato };
+          
+          criarProfissional(dadosProfissional);
           Retrieve();
-
+          
           document.getElementById("nome").value = "";
           document.getElementById("crp").value = "";
           document.getElementById("modPresencial").checked = false;
@@ -45,12 +31,17 @@
           document.getElementById("link").value = "";
           document.getElementById("numero").value = "";
           document.getElementById("contato").value = "";
+        
+        
         };
 
         function Retrieve(){
           let tbody = document.getElementById("resultados");
           let html = "";
-          listaDeProfissionais.forEach(elemento => {
+
+          let profissionais = getProfissionais();  
+
+          profissionais.forEach(elemento => {
             html += `<tr style="border-bottom: 1px solid #eee;">
                           <td style="padding: 8px;">${elemento.nome}</td>
                           <td style="padding: 8px;">${elemento.crp}</td>
@@ -68,7 +59,9 @@
         };
 
         function Update(id){
-          let resultado = listaDeProfissionais.find(obj => obj.id === id);
+
+          let resultado = buscarProfissionalPorId(id);
+
           let html = `<input type="text" id="nomeParaEditar" placeholder="Nome" value="${resultado.nome}">
                       <input type="text" id="crpParaEditar" placeholder="CRP" value="${resultado.crp}">
                       <input type="text" id="modalidadeParaEditar" placeholder="Modalidade" value="${resultado.modalidade}">
@@ -76,35 +69,29 @@
                       <input type="text" id="numeroParaEditar" placeholder="Número" value="${resultado.numero}">
                       <input type="text" id="contatoParaEditar" placeholder="Contato" value="${resultado.contato}">
                       <button onclick="editarDados(${id})" style="padding: 10px; cursor: pointer;">Confirmar Edição</button>`;
-          let divEditar = document.getElementById('editar');
-          divEditar.innerHTML = html;
+          
+          document.getElementById('editar').innerHTML = html;
         };
 
         function editarDados(id){
-          let nome = document.getElementById("nomeParaEditar").value;
-          let crp = document.getElementById("crpParaEditar").value;
-          let modalidade = document.getElementById("modalidadeParaEditar").value;
-          let link = document.getElementById("linkParaEditar").value;
-          let numero = document.getElementById("numeroParaEditar").value;
-          let contato = document.getElementById("contatoParaEditar").value;
+        let dadosAtualizados = {
+              nome: document.getElementById("nomeParaEditar").value,
+              crp: document.getElementById("crpParaEditar").value,
+              modalidade: document.getElementById("modalidadeParaEditar").value,
+              link: document.getElementById("linkParaEditar").value,
+              numero: document.getElementById("numeroParaEditar").value,
+              contato: document.getElementById("contatoParaEditar").value
+            };
 
-          let resultado = listaDeProfissionais.find(obj => obj.id === id);
-          resultado.nome = nome;
-          resultado.crp = crp;
-          resultado.modalidade = modalidade;
-          resultado.link = link;
-          resultado.numero = numero;
-          resultado.contato = contato;
+        atualizarProfissionalBd(id, dadosAtualizados);
 
-          localStorage.setItem('profissionais', JSON.stringify(listaDeProfissionais));
-          Retrieve();
-          let divEditar = document.getElementById('editar');
-          divEditar.innerHTML = "";
+        Retrieve();
+
+        document.getElementById('editar').innerHTML = ""
         };
 
         function Delete(id){
-          let novaLista = listaDeProfissionais.filter(obj => obj.id !== id);
-          listaDeProfissionais = novaLista;
-          localStorage.setItem('profissionais', JSON.stringify(listaDeProfissionais));
+          deletarProfissionalBd(id);
+    
           Retrieve();
         };

@@ -87,7 +87,7 @@
     }
 
     function carregarPsicologos() {
-        todosPsicologos = retrieveProfissionais();
+        todosPsicologos = getProfissionais();
         paginaAtual = 1;
         renderizarCards();
     }
