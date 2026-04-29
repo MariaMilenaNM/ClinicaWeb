@@ -12,7 +12,7 @@
         document.getElementById('authSubtitulo').innerText = 'Acesse sua conta Mentis';
     }
 
-    function cadastrar() {
+    async function cadastrar() {
         let nome      = document.getElementById('cadNome').value.trim();
         let data      = document.getElementById('cadData').value;
         let email     = document.getElementById('cadEmail').value.trim();
@@ -35,9 +35,8 @@
             return;
         }
 
-        let pacientes = JSON.parse(localStorage.getItem('pacientes') || '[]');
+        let resultado = await cadastrarPaciente(nome, data, email, telefone, cidade, estado, senha);
 
-        let resultado = cadastrarPaciente(nome, data, email, telefone, cidade, estado, senha);
         if (resultado === 'duplicado') {
             alert('Já existe uma conta com este e-mail. Faça login.');
             mostrarLogin();
@@ -49,7 +48,7 @@
     }
 
 
-    function fazerLogin() {
+    async function fazerLogin() {
         let email = document.getElementById('loginEmail').value.trim();
         let senha = document.getElementById('loginSenha').value;
 
@@ -58,7 +57,7 @@
             return;
         }
 
-        let encontrado = buscarPaciente(email, senha);
+        let encontrado = await buscarPaciente(email, senha);
         if (!encontrado) {
             alert('E-mail ou senha incorretos.'); return;
         }
