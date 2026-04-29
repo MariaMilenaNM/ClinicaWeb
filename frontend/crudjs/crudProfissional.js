@@ -1,38 +1,31 @@
-function getProfissionais() {
-    return JSON.parse(localStorage.getItem('profissionais') || '[]');
+const URL_PROF = 'http://127.0.0.1:5000/profissionais';
+
+async function getProfissionais() {
+    const res = await fetch(URL_PROF);
+    return await res.json();
 }
 
-function setProfissionais(lista) {
-    localStorage.setItem('profissionais', JSON.stringify(lista));
+async function criarProfissional(dados) {
+    await fetch(URL_PROF, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    });
 }
 
-function criarProfissional(dados) {
-    let lista = getProfissionais();
-    let index = lista.length > 0 ? Math.max(...lista.map(p => p.id)) + 1 : 0;
-    
-    let novoProfissional = { id: index, ...dados };
-    lista.push(novoProfissional);
-    setProfissionais(lista);
+async function buscarProfissionalPorId(id) {
+    const res = await fetch(`${URL_PROF}/${id}`);
+    return res.ok ? await res.json() : null;
 }
 
-function buscarProfissionalPorId(id) {
-    let lista = getProfissionais();
-    return lista.find(obj => obj.id === id);
+async function atualizarProfissionalBd(id, dadosAtualizados) {
+    await fetch(`${URL_PROF}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosAtualizados)
+    });
 }
 
-function atualizarProfissionalBd(id, dadosAtualizados) {
-    let lista = getProfissionais();
-    let profissional = lista.find(obj => obj.id === id);
-    
-    if (profissional) {
-
-        Object.assign(profissional, dadosAtualizados);
-        setProfissionais(lista);
-    }
-}
-
-function deletarProfissionalBd(id) {
-    let lista = getProfissionais();
-    let novaLista = lista.filter(obj => obj.id !== id);
-    setProfissionais(novaLista);
+async function deletarProfissionalBd(id) {
+    await fetch(`${URL_PROF}/${id}`, { method: 'DELETE' });
 }

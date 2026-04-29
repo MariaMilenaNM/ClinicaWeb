@@ -1,4 +1,4 @@
-    let pacienteLogado = JSON.parse(localStorage.getItem('pacienteLogado'));
+let pacienteLogado = JSON.parse(localStorage.getItem('pacienteLogado'));
 
     if (!pacienteLogado) {
         window.location.href = 'paciente.html';
@@ -67,14 +67,6 @@
             return;
         }
 
-        let pacientes = JSON.parse(localStorage.getItem('pacientes') || '[]');
-        let idx = pacientes.findIndex(p => p.email === pacienteLogado.email);
-        pacientes[idx].nome     = novoNome;
-        pacientes[idx].telefone = novoTelefone;
-        pacientes[idx].cidade   = novaCidade;
-        pacientes[idx].estado   = novoEstado;
-        localStorage.setItem('pacientes', JSON.stringify(pacientes));
-
         pacienteLogado.nome     = novoNome;
         pacienteLogado.telefone = novoTelefone;
         pacienteLogado.cidade   = novaCidade;
@@ -86,8 +78,8 @@
         alert('Perfil atualizado!');
     }
 
-    function carregarPsicologos() {
-        todosPsicologos = getProfissionais();
+    async function carregarPsicologos() {
+        todosPsicologos = await getProfissionais();
         paginaAtual = 1;
         renderizarCards();
     }
@@ -115,8 +107,7 @@
           <div class="psi-info">
             <h3 class="psi-nome">${p.nome}</h3>
             <span class="psi-crp">CRP: ${p.crp}</span>
-            <span class="psi-modalidade tag-${p.modalidade === 'Presencial ' +
-            'e Remota' ? 'ambas' : p.modalidade.toLowerCase()}">${p.modalidade}</span>
+            <span class="psi-modalidade tag-${p.modalidade === 'Presencial e Remota' ? 'ambas' : p.modalidade.toLowerCase()}">${p.modalidade}</span>
             <p class="psi-contato"> ${p.contato}</p>
             <p class="psi-contato"> ${p.numero}</p>
           </div>
@@ -157,4 +148,3 @@
         localStorage.removeItem('pacienteLogado');
         window.location.href = 'index.html';
     }
-

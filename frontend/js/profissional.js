@@ -1,6 +1,6 @@
         Retrieve();
 
-        function Create(){
+        async function Create(){
           let nome = document.getElementById("nome").value;
           let crp = document.getElementById("crp").value;
           let presencial = document.getElementById("modPresencial").checked;
@@ -21,8 +21,8 @@
 
           let dadosProfissional = { nome, crp, modalidade, link, numero, contato };
           
-          criarProfissional(dadosProfissional);
-          Retrieve();
+          await criarProfissional(dadosProfissional);
+          await Retrieve();
           
           document.getElementById("nome").value = "";
           document.getElementById("crp").value = "";
@@ -35,11 +35,11 @@
         
         };
 
-        function Retrieve(){
+        async function Retrieve(){
           let tbody = document.getElementById("resultados");
           let html = "";
 
-          let profissionais = getProfissionais();  
+          let profissionais = await getProfissionais();  
 
           profissionais.forEach(elemento => {
             html += `<tr style="border-bottom: 1px solid #eee;">
@@ -58,9 +58,9 @@
           tbody.innerHTML = html;
         };
 
-        function Update(id){
+        async function Update(id){
 
-          let resultado = buscarProfissionalPorId(id);
+          let resultado = await buscarProfissionalPorId(id);
 
           let html = `<input type="text" id="nomeParaEditar" placeholder="Nome" value="${resultado.nome}">
                       <input type="text" id="crpParaEditar" placeholder="CRP" value="${resultado.crp}">
@@ -73,7 +73,7 @@
           document.getElementById('editar').innerHTML = html;
         };
 
-        function editarDados(id){
+        async function editarDados(id){
         let dadosAtualizados = {
               nome: document.getElementById("nomeParaEditar").value,
               crp: document.getElementById("crpParaEditar").value,
@@ -83,15 +83,15 @@
               contato: document.getElementById("contatoParaEditar").value
             };
 
-        atualizarProfissionalBd(id, dadosAtualizados);
+        await atualizarProfissionalBd(id, dadosAtualizados);
 
-        Retrieve();
+        await Retrieve();
 
         document.getElementById('editar').innerHTML = ""
         };
 
-        function Delete(id){
-          deletarProfissionalBd(id);
+        async function Delete(id){
+          await deletarProfissionalBd(id);
     
           Retrieve();
         };
