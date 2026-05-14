@@ -27,3 +27,17 @@ desktop.ini
 # Editor-based HTTP Client requests
 /httpRequests/
 
+# Ambientes Virtuais (bolhas de proteção)
+.venv/
+venv/
+env/
+
+# Banco de dados local
+*.db
+*.sqlite3
+
+# Arquivos compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
