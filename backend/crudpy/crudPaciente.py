@@ -1,51 +1,20 @@
 from flask import Blueprint, request, jsonify
-from sqlalchemy import *
-from sqlalchemy.orm import *
-
-Base = declarative_base()
-
-engine = create_engine("sqlite:///clinica.db")
-Session = sessionmaker(bind=engine)
-session = Session()
-
-class Paciente(Base):
-    __tablename__ = "pacientes"
-
-    id       = Column(Integer, primary_key=True)
-    nome     = Column(String)
-    data     = Column(String)
-    email    = Column(String)
-    telefone = Column(String)
-    cidade   = Column(String)
-    estado   = Column(String)
-    senha    = Column(String)
-
-Base.metadata.create_all(engine)
+from repository.repositoryPaciente import PacienteRepository
 
 paciente_bp = Blueprint('paciente', __name__)
+
 
 @paciente_bp.route('/cadastrar', methods=['POST'])
 def cadastrar():
     dados = request.json
     email = dados.get('email')
 
-    if session.query(Paciente).filter_by(email=email).first():
+    if PacienteRepository.buscar_por_email(email):
         return jsonify({'status': 'duplicado'}), 409
 
-    novo_paciente = Paciente(
-        nome=dados.get('nome'),
-        data=dados.get('data'),
-        email=email,
-        telefone=dados.get('telefone'),
-        cidade=dados.get('cidade'),
-        estado=dados.get('estado'),
-        senha=dados.get('senha')
-    )
+    novo_paciente = PacienteRepository.criar(dados)
+    return jsonify(novo_paciente.to_dict()), 201
 
-    session.add(novo_paciente)
-    session.commit()
-
-    return jsonify({'status': 'ok'}), 201
 
 @paciente_bp.route('/login', methods=['POST'])
 def login():
@@ -53,49 +22,25 @@ def login():
     email = dados.get('email')
     senha = dados.get('senha')
 
-    paciente = session.query(Paciente).filter_by(email=email, senha=senha).first()
+    paciente = PacienteRepository.buscar_por_email_e_senha(email, senha)
 
     if paciente:
-        p_seguro = {
-            'id': paciente.id,
-            'nome': paciente.nome,
-            'data': paciente.data,
-            'email': paciente.email,
-            'telefone': paciente.telefone,
-            'cidade': paciente.cidade,
-            'estado': paciente.estado
-        }
-        return jsonify(p_seguro), 200
+        return jsonify(paciente.to_dict()), 200
 
     return jsonify({'erro': 'Não encontrado'}), 404
 
+
 @paciente_bp.route('/<int:id>', methods=['GET'])
 def buscar(id):
-    p = session.query(Paciente).filter_by(id=id).first()
-    if not p:
-        return jsonify({'erro': 'Paciente não encontrado'}), 404
+    p = PacienteRepository.buscar_por_id(id)
+    return jsonify(p.to_dict()) if p else (jsonify({'erro': 'Paciente não encontrado'}), 404)
 
-    return jsonify({
-        'id':       p.id,
-        'nome':     p.nome,
-        'data':     p.data,
-        'email':    p.email,
-        'telefone': p.telefone,
-        'cidade':   p.cidade,
-        'estado':   p.estado
-    }), 200
 
 @paciente_bp.route('/<int:id>', methods=['PUT'])
 def atualizar(id):
     dados = request.json
-    p = session.query(Paciente).filter_by(id=id).first()
-    if not p:
-        return jsonify({'erro': 'Paciente não encontrado'}), 404
+    p = PacienteRepository.atualizar(id, dados)
 
-    if 'nome'     in dados: p.nome     = dados['nome']
-    if 'telefone' in dados: p.telefone = dados['telefone']
-    if 'cidade'   in dados: p.cidade   = dados['cidade']
-    if 'estado'   in dados: p.estado   = dados['estado']
-
-    session.commit()
-    return jsonify({'status': 'atualizado'}), 200
+    if p:
+        return jsonify(p.to_dict()), 200
+    return jsonify({'erro': 'Paciente não encontrado'}), 404
