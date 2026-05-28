@@ -1,38 +1,40 @@
 import express from "express";
+import { PrismaClient } from "@prisma/client";
 
 const routes = express.Router();
 
-let pacientes = [];
-let proximoId = 1;
+const prisma = new PrismaClient();
 
-routes.post("/cadastrar", (req, res) => {
+routes.post("/cadastrar", async (req, res) => {
     const dados = req.body;
 
-    const jaExiste = pacientes.find((p) => p.email === dados.email);
+    const jaExiste = await prisma.paciente.findUnique({
+        where: { email: dados.email }
+    });
     if (jaExiste) {
         return res.status(409).json({ status: "duplicado" });
     }
 
-    const novoPaciente = {
-        id: proximoId++,
-        nome: dados.nome,
-        data: dados.data,
-        email: dados.email,
-        telefone: dados.telefone,
-        cidade: dados.cidade,
-        estado: dados.estado,
-        senha: dados.senha
-    };
-
-    pacientes.push(novoPaciente);
+    await prisma.paciente.create({
+        data: {
+            nome:     dados.nome,
+            data:     dados.data,
+            email:    dados.email,
+            telefone: dados.telefone,
+            cidade:   dados.cidade,
+            estado:   dados.estado,
+            senha:    dados.senha
+        }
+    });
     return res.status(201).json({ status: "ok" });
 });
 
-routes.post("/login", (req, res) => {
+routes.post("/login", async (req, res) => {
     const { email, senha } = req.body;
 
-    const paciente = pacientes.find((p) => p.email === email && p.senha === senha);
-
+    const paciente = await prisma.paciente.findFirst({
+        where: { email, senha }
+    });
     if (!paciente) {
         return res.status(404).json({ erro: "Não encontrado" });
     }
@@ -41,10 +43,12 @@ routes.post("/login", (req, res) => {
     return res.status(200).json(pacienteSeguro);
 });
 
-routes.get("/:id", (req, res) => {
+routes.get("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
-    const paciente = pacientes.find((p) => p.id === id);
 
+    const paciente = await prisma.paciente.findUnique({
+        where: { id }
+    });
     if (!paciente) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
@@ -53,34 +57,37 @@ routes.get("/:id", (req, res) => {
     return res.status(200).json(pacienteSeguro);
 });
 
-routes.put("/:id", (req, res) => {
+routes.put("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     const dados = req.body;
 
-    const paciente = pacientes.find((p) => p.id === id);
-    if (!paciente) {
+    const existe = await prisma.paciente.findUnique({ where: { id } });
+    if (!existe) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
 
-    if (dados.nome)     paciente.nome     = dados.nome;
-    if (dados.telefone) paciente.telefone = dados.telefone;
-    if (dados.cidade)   paciente.cidade   = dados.cidade;
-    if (dados.estado)   paciente.estado   = dados.estado;
-
+    await prisma.paciente.update({
+        where: { id },
+        data: {
+            ...(dados.nome     && { nome:     dados.nome }),
+            ...(dados.telefone && { telefone: dados.telefone }),
+            ...(dados.cidade   && { cidade:   dados.cidade }),
+            ...(dados.estado   && { estado:   dados.estado })
+        }
+    });
     return res.status(200).json({ status: "atualizado" });
 });
 
-routes.delete("/:id", (req, res) => {
+routes.delete("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
-    const index = pacientes.findIndex((p) => p.id === id);
- 
-    if (index === -1) {
+
+    const existe = await prisma.paciente.findUnique({ where: { id } });
+    if (!existe) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
- 
-    pacientes.splice(index, 1);
+
+    await prisma.paciente.delete({ where: { id } });
     return res.status(200).json({ status: "removido" });
 });
- 
 
 export default routes;

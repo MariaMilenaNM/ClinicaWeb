@@ -1,64 +1,86 @@
 import express from "express";
 
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 const routes = express.Router();
 
+//let profissionais = [];
 
-let profissionais = [];
-
-
-routes.get("/", (req, res) => {
-    res.status(200).json(profissionais);
+routes.get("/", async (req, res) => {
+try {
+        const profissionais = await prisma.profissional.findMany();
+        res.status(200).json(profissionais);
+    } catch (error) {
+        res.status(500).json({ erro: "Erro ao buscar profissionais" });
+    }
 });
 
 
-routes.post("/", (req, res) => {
-    const dados = req.body;
-    
+routes.post("/", async (req, res) => {
+const dados = req.body;
+
     if (!dados || Object.keys(dados).length === 0) {
         return res.status(400).json({ erro: "Dados inválidos" });
     }
 
-
-    const newId = profissionais.length > 0 ? Math.max(...profissionais.map(p => p.id)) + 1 : 1;
-    
-    const novoProfissional = { id: newId, ...dados };
-    profissionais.push(novoProfissional);
-
-    return res.status(201).json(novoProfissional);
-});
-
-routes.get("/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const profissional = profissionais.find(p => p.id === id);
-
-    if (profissional) {
-        return res.status(200).json(profissional);
+    try {
+        const novoProfissional = await prisma.profissional.create({
+            data: dados
+        });
+        return res.status(201).json(novoProfissional);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: "Erro ao criar profissional" });
     }
-    return res.status(404).json({ erro: "404" });
 });
 
-routes.put("/:id", (req, res) => {
-    const id = parseInt(req.params.id);
+routes.get("/:id", async (req, res) => {
+const id = parseInt(req.params.id);
+
+    try {
+        const profissional = await prisma.profissional.findUnique({
+            where: { id: id }
+        });
+
+        if (profissional) {
+            return res.status(200).json(profissional);
+        }
+        return res.status(404).json({ erro: "Profissional não encontrado (404)" });
+    } catch (error) {
+        return res.status(500).json({ erro: "Erro ao buscar profissional" });
+    }
+});
+
+routes.put("/:id", async (req, res) => {
+const id = parseInt(req.params.id);
     const dadosNovos = req.body;
-    
-    const index = profissionais.findIndex(p => p.id === id);
 
-    if (index !== -1) {
-        profissionais[index] = { ...profissionais[index], ...dadosNovos, id: id };
-        return res.status(200).json(profissionais[index]);
+    try {
+        const profissionalAtualizado = await prisma.profissional.update({
+            where: { id: id },
+            data: dadosNovos
+        });
+        return res.status(200).json(profissionalAtualizado);
+    } catch (error) {
+        // O Prisma dispara um erro automaticamente se tentar dar update num ID que não existe
+        return res.status(404).json({ erro: "Profissional não encontrado (404)" });
     }
-    return res.status(404).json({ erro: "404" });
 });
 
-routes.delete("/:id", (req, res) => {
+routes.delete("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
-    const index = profissionais.findIndex(p => p.id === id);
 
-    if (index !== -1) {
-        profissionais.splice(index, 1); 
+    try {
+        await prisma.profissional.delete({
+            where: { id: id }
+        });
         return res.status(200).json({ status: "removido" });
+    } catch (error) {
+        // O Prisma dispara um erro automaticamente se tentar deletar um ID que não existe
+        return res.status(404).json({ erro: "Profissional não encontrado (404)" });
     }
-    return res.status(404).json({ erro: "404" });
 });
 
 export default routes;
