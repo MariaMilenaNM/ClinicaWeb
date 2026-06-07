@@ -1,9 +1,29 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import jwt from "jsonwebtoken";
 
 const routes = express.Router();
-
 const prisma = new PrismaClient();
+
+const JWT_SECRET = "TiaMimi";
+
+function verificarToken(req, res, next) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ erro: "Token não informado" });
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+
+    try {
+        const payload = jwt.verify(token, JWT_SECRET);
+        req.paciente = payload;
+        next();
+    } catch (erro) {
+        return res.status(401).json({ erro: "Token inválido" });
+    }
+}
 
 routes.post("/cadastrar", async (req, res) => {
     const dados = req.body;
@@ -39,11 +59,16 @@ routes.post("/login", async (req, res) => {
         return res.status(404).json({ erro: "Não encontrado" });
     }
 
-    const { senha: _, ...pacienteSeguro } = paciente;
-    return res.status(200).json(pacienteSeguro);
+    const token = jwt.sign(
+        { id: paciente.id, email: paciente.email },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+    );
+
+    return res.status(200).json({ token });
 });
 
-routes.get("/:id", async (req, res) => {
+routes.get("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
 
     const paciente = await prisma.paciente.findUnique({
@@ -57,7 +82,7 @@ routes.get("/:id", async (req, res) => {
     return res.status(200).json(pacienteSeguro);
 });
 
-routes.put("/:id", async (req, res) => {
+routes.put("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
     const dados = req.body;
 
@@ -78,7 +103,7 @@ routes.put("/:id", async (req, res) => {
     return res.status(200).json({ status: "atualizado" });
 });
 
-routes.delete("/:id", async (req, res) => {
+routes.delete("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
 
     const existe = await prisma.paciente.findUnique({ where: { id } });
