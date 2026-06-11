@@ -25,6 +25,10 @@ const dados = req.body;
         return res.status(400).json({ erro: "Dados inválidos" });
     }
 
+    if (dados.crp) {
+        dados.crp = parseInt(dados.crp, 10);
+    }
+
     try {
         const novoProfissional = await prisma.profissional.create({
             data: dados
