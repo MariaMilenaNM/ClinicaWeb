@@ -1,10 +1,8 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
+import { pacienteRepository } from "../repository/pacienteRepository.js"; 
 
 const routes = express.Router();
-const prisma = new PrismaClient();
-
 const JWT_SECRET = "TiaMimi";
 
 function verificarToken(req, res, next) {
@@ -28,33 +26,30 @@ function verificarToken(req, res, next) {
 routes.post("/cadastrar", async (req, res) => {
     const dados = req.body;
 
-    const jaExiste = await prisma.paciente.findUnique({
-        where: { email: dados.email }
-    });
+    const jaExiste = await pacienteRepository.findByEmail(dados.email);
+    
     if (jaExiste) {
         return res.status(409).json({ status: "duplicado" });
     }
 
-    await prisma.paciente.create({
-        data: {
-            nome:     dados.nome,
-            data:     dados.data,
-            email:    dados.email,
-            telefone: dados.telefone,
-            cidade:   dados.cidade,
-            estado:   dados.estado,
-            senha:    dados.senha
-        }
+    await pacienteRepository.create({
+        nome:     dados.nome,
+        data:     dados.data,
+        email:    dados.email,
+        telefone: dados.telefone,
+        cidade:   dados.cidade,
+        estado:   dados.estado,
+        senha:    dados.senha
     });
+    
     return res.status(201).json({ status: "ok" });
 });
 
 routes.post("/login", async (req, res) => {
     const { email, senha } = req.body;
 
-    const paciente = await prisma.paciente.findFirst({
-        where: { email, senha }
-    });
+    const paciente = await pacienteRepository.findByEmailAndSenha(email, senha);
+    
     if (!paciente) {
         return res.status(404).json({ erro: "Não encontrado" });
     }
@@ -71,9 +66,8 @@ routes.post("/login", async (req, res) => {
 routes.get("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
 
-    const paciente = await prisma.paciente.findUnique({
-        where: { id }
-    });
+    const paciente = await pacienteRepository.findById(id);
+    
     if (!paciente) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
@@ -86,32 +80,33 @@ routes.put("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
     const dados = req.body;
 
-    const existe = await prisma.paciente.findUnique({ where: { id } });
+    const existe = await pacienteRepository.findById(id);
+    
     if (!existe) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
 
-    await prisma.paciente.update({
-        where: { id },
-        data: {
-            ...(dados.nome     && { nome:     dados.nome }),
-            ...(dados.telefone && { telefone: dados.telefone }),
-            ...(dados.cidade   && { cidade:   dados.cidade }),
-            ...(dados.estado   && { estado:   dados.estado })
-        }
-    });
+    const dadosAtualizados = {
+        ...(dados.nome     && { nome:     dados.nome }),
+        ...(dados.telefone && { telefone: dados.telefone }),
+        ...(dados.cidade   && { cidade:   dados.cidade }),
+        ...(dados.estado   && { estado:   dados.estado })
+    };
+
+    await pacienteRepository.update(id, dadosAtualizados);
     return res.status(200).json({ status: "atualizado" });
 });
 
 routes.delete("/:id", verificarToken, async (req, res) => {
     const id = parseInt(req.params.id);
 
-    const existe = await prisma.paciente.findUnique({ where: { id } });
+    const existe = await pacienteRepository.findById(id);
+    
     if (!existe) {
         return res.status(404).json({ erro: "Paciente não encontrado" });
     }
 
-    await prisma.paciente.delete({ where: { id } });
+    await pacienteRepository.delete(id);
     return res.status(200).json({ status: "removido" });
 });
 

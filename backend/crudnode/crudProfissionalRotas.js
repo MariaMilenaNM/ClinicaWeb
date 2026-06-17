@@ -1,25 +1,19 @@
 import express from "express";
-
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { profissionalRepository } from "../repository/profissionalRepository.js"; 
 
 const routes = express.Router();
 
-//let profissionais = [];
-
 routes.get("/", async (req, res) => {
-try {
-        const profissionais = await prisma.profissional.findMany();
+    try {
+        const profissionais = await profissionalRepository.findAll();
         res.status(200).json(profissionais);
     } catch (error) {
         res.status(500).json({ erro: "Erro ao buscar profissionais" });
     }
 });
 
-
 routes.post("/", async (req, res) => {
-const dados = req.body;
+    const dados = req.body;
 
     if (!dados || Object.keys(dados).length === 0) {
         return res.status(400).json({ erro: "Dados inválidos" });
@@ -30,9 +24,7 @@ const dados = req.body;
     }
 
     try {
-        const novoProfissional = await prisma.profissional.create({
-            data: dados
-        });
+        const novoProfissional = await profissionalRepository.create(dados);
         return res.status(201).json(novoProfissional);
     } catch (error) {
         console.error(error);
@@ -41,12 +33,10 @@ const dados = req.body;
 });
 
 routes.get("/:id", async (req, res) => {
-const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
 
     try {
-        const profissional = await prisma.profissional.findUnique({
-            where: { id: id }
-        });
+        const profissional = await profissionalRepository.findById(id);
 
         if (profissional) {
             return res.status(200).json(profissional);
@@ -58,17 +48,13 @@ const id = parseInt(req.params.id);
 });
 
 routes.put("/:id", async (req, res) => {
-const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     const dadosNovos = req.body;
 
     try {
-        const profissionalAtualizado = await prisma.profissional.update({
-            where: { id: id },
-            data: dadosNovos
-        });
+        const profissionalAtualizado = await profissionalRepository.update(id, dadosNovos);
         return res.status(200).json(profissionalAtualizado);
     } catch (error) {
-        // O Prisma dispara um erro automaticamente se tentar dar update num ID que não existe
         return res.status(404).json({ erro: "Profissional não encontrado (404)" });
     }
 });
@@ -77,12 +63,9 @@ routes.delete("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 
     try {
-        await prisma.profissional.delete({
-            where: { id: id }
-        });
+        await profissionalRepository.delete(id);
         return res.status(200).json({ status: "removido" });
     } catch (error) {
-        // O Prisma dispara um erro automaticamente se tentar deletar um ID que não existe
         return res.status(404).json({ erro: "Profissional não encontrado (404)" });
     }
 });
