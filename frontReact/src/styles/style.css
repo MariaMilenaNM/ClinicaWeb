@@ -43,7 +43,7 @@ header {
 #textos-marca h1 {
   font-size: 28px;
   color: var(--white);
-  font-weight: 300; /* Letra mais fina conforme a imagem */
+  font-weight: 300; /* Letra mais fina */
   letter-spacing: 1px;
 }
 

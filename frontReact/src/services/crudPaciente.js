@@ -1,6 +1,6 @@
 const URL_BASE = 'http://127.0.0.1:5000/pacientes';
 
-async function cadastrarPaciente(nome, data, email, telefone, cidade, estado, senha) {
+export async function cadastrarPaciente(nome, data, email, telefone, cidade, estado, senha) {
     const response = await fetch(`${URL_BASE}/cadastrar`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,7 +11,7 @@ async function cadastrarPaciente(nome, data, email, telefone, cidade, estado, se
     return response.ok ? 'ok' : 'erro';
 }
 
-async function buscarPaciente(email, senha) {
+export async function buscarPaciente(email, senha) {
     const response = await fetch(`${URL_BASE}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

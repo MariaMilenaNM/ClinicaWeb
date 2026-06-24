@@ -4,14 +4,14 @@ function getToken() {
     return localStorage.getItem('token');
 }
 
-async function buscarPacientePorId(id) {
+export async function buscarPacientePorId(id) {
     const res = await fetch(`${URL_PAINEL}/${id}`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
     return res.ok ? await res.json() : null;
 }
 
-async function atualizarPacienteBd(id, dados) {
+export async function atualizarPacienteBd(id, dados) {
     const res = await fetch(`${URL_PAINEL}/${id}`, {
         method: 'PUT',
         headers: {
