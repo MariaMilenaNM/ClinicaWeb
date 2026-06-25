@@ -4,7 +4,7 @@
   --light-blue: #91C1FF;
   --green: #90FF78;
   --pale-blue: #C9DEFF;
-  --white: #FFFFFF;
+  --white: #f4f4f4;
 }
 
 * {
@@ -152,10 +152,12 @@ nav a:hover {
 }
 
 .card {
-  width: 300px;
+  min-width: 400px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .imgm {
@@ -372,6 +374,7 @@ nav a:hover {
   font-size: 15px;
   font-weight: 400;
   color: var(--dark-blue);
+  background-color: #f3f1f1;
   list-style: none;
 }
 

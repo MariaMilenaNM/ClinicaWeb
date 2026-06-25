@@ -70,7 +70,7 @@ export default function Painel() {
                         </div>
                     )}
 
-                    <button className="btn-sair" onClick={sair}>Sair da Conta</button>
+                    <button className="btn-sair-painel" onClick={sair}>Sair</button>
                 </div>
             </aside>
 

@@ -15,6 +15,7 @@ export default function Paciente() {
 
     return (
         <>
+        <div className="auth-container-page">
             <Link to="/" className="btn-sair">Sair</Link>
 
             <div id="telaAuth">
@@ -90,6 +91,7 @@ export default function Paciente() {
                     )}
                 </div>
             </div>
+        </div>    
         </>
     );
 }

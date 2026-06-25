@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App'; // Ou o componente que chama suas rotas
+import App from './App'; // o componente que chama as rotas
 import './styles/style.css';
 import './styles/media.css';
 

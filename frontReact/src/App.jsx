@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Importando as suas páginas
+// Importando as páginas
 import LandingPage from './pages/LandingPage';
 import Paciente from './pages/Paciente';
 import Painel from './pages/Painel';

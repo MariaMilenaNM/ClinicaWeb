@@ -1,25 +1,29 @@
 /* PROFISSIONAIS */
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+.auth-container-page {
     background-color: #0A0B26;
-    margin: 0;
-    min-height: 300px;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    position: relative; /* Essencial para o botão de sair não voar pela tela */
+    box-sizing: border-box;
 }
 
 .card {
-    background-color: #ffffff;
-    width: 90%;
-    max-width: 900px;
-    min-width: 600px;
+display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    width: 100%;
+    min-height: auto;
+    max-width: 800px;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 10px rgba(0,0,0,0.3);
     color: #0A0B26;
     box-sizing: border-box;
+    margin: 40px auto;
 }
 
 h2 {
@@ -33,14 +37,16 @@ form {
     flex-direction: column;
     gap: 12px;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     margin: 20px auto;
 }
 
 input {
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 button {
@@ -72,7 +78,7 @@ summary {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 25px;
+    margin-top: 30px;
     background: transparent;
     table-layout: auto;
 }
@@ -86,12 +92,12 @@ th, td {
 
 .btn-sair {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 50px;
+    right: 40px;
     color: white;
     text-decoration: none;
     background: #d9534f;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 5px;
 }
 
@@ -101,6 +107,7 @@ th, td {
     width: 100%;
     display: flex;
     justify-content: center;
+    color: #0A0B26;
 }
 
 .auth-card {
@@ -202,8 +209,8 @@ th, td {
     width: auto;
     padding: 5px 10px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 40px;
+    right: 40px;
 }
 
 .btn-sair:hover {
